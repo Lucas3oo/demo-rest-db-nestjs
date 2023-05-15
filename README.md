@@ -1,5 +1,5 @@
 # demo-rest-db-nestjs
-Small demo project for a REST API with DB, written in TypeScript using the NestJS framework (based on ExpressJS). NextJS is very similar to Spring boot.
+Small demo project for a REST API with DB, written in TypeScript using the NestJS framework (based on ExpressJS). NestJS is very similar to Spring boot.
 
 
 ## Description
