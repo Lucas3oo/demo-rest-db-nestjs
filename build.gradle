@@ -1,0 +1,46 @@
+plugins {
+  id 'base'
+  id 'com.github.node-gradle.node' version '5.0.0'
+  id 'se.solrike.sonarlint' version '1.0.0-beta.14'
+}
+repositories {
+  mavenCentral()
+}
+node {
+  // Version of node to use.
+  version = '18.9.1'
+  // If empty, the plugin will use the npm command bundled with Node.js
+  npmVersion = ''
+  // If true, it will download node using above parameters.
+  download = true
+}
+sonarlintNodeMain {
+  ignoreFailures = false
+  source = fileTree('src')
+  exclude '**/*.spec.ts'
+  //exclude '**/book.controller.ts'
+}
+sonarlintNodeTest {
+  ignoreFailures = true
+  source = fileTree('src')
+  include '**/*.spec.ts'
+  isTestSource = true
+}
+
+
+task sonarlintListRules(type: se.solrike.sonarlint.SonarlintListRules) {
+  description = 'List sonarlint rules'
+  group = 'verification'
+}
+
+dependencies {
+  sonarlintPlugins 'org.sonarsource.html:sonar-html-plugin:3.6.0.3106'
+  sonarlintPlugins 'org.sonarsource.javascript:sonar-javascript-plugin:10.0.1.20755' // both JS and TS
+  sonarlintPlugins 'org.sonarsource.xml:sonar-xml-plugin:2.6.1.3686'
+}
+
+
+// to upgrade the metainfo about which gradle version we shall use. Run ./gradlew wrapper after you have updated the version. The commit the new wrapper files except the gradlew.bat
+wrapper {
+  gradleVersion = '7.5.1'
+}

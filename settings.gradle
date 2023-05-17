@@ -1,0 +1,5 @@
+//pluginManagement {
+//  includeBuild '../sonarlint-gradle-plugin'
+//}
+
+rootProject.name = 'demo-rest-db-nestjs'
