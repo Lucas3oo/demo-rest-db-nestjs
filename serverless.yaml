@@ -1,0 +1,39 @@
+service: books-api
+
+plugins:
+  - serverless-plugin-optimize
+  - serverless-offline
+  - serverless-dynamodb-local
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-north-1
+  # Default stage (default: dev)
+  stage: dev
+  # Use a custom name for the CloudFormation stack
+  stackName: demo-lambda-stack-name
+  deploymentMethod: direct
+
+functions:
+  api:
+    # The module 'handler' is exported in the file 'src/aws-lambda-proxy'
+    handler: dist/aws-lambda-proxy.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: ANY
+
+
+# Optional deployment packaging configuration
+package:
+  # Directories and files to include in the deployed package
+  patterns:
+    - dist/**
+    - '!.gradle/**'
+    - '!.vscode/**'
+    - '!.*'
+    - '!gradle/**'
+    - '!gradlew'
+    - '!build.gradle'
+    - '!nest-cli.json'
+

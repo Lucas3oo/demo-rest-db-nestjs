@@ -8,7 +8,7 @@ repositories {
 }
 node {
   // Version of node to use.
-  version = '18.9.1'
+  version = file('.node-version').text.trim()
   // If empty, the plugin will use the npm command bundled with Node.js
   npmVersion = ''
   // If true, it will download node using above parameters.
